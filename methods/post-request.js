@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
     try {
       let body = await requestBodyparser(req);
       body.id = crypto.randomUUID();
+      console.log(body.id);
       req.memes.push(body);
       writeToFile(req.memes);
       res.writeHead(201, { "Content-Type": "application/json" });

@@ -1,21 +1,27 @@
 const http = require("http");
 require("dotenv").configDotenv();
+const getReq = require("./methods/get-request");
+const postReq = require("./methods/post-request");
+const putReq = require("./methods/put-request");
+const deleteReq = require("./methods/delete-request");
+let memes = require("./data/memes.json");
 
 const PORT = process.env.PORT || 5001;
 
 const server = http.createServer((req, res) => {
+  req.memes = memes;
   switch (req.method) {
     case "GET":
-      getReq(res, req);
+      getReq(req, res);
       break;
     case "POST":
-      postRes(res, req);
+      postReq(req, res);
       break;
     case "PUT":
-      putRes(res, req);
+      putReq(req, res);
       break;
     case "DELETE":
-      deleteRes(res, req);
+      deleteReq(req, res);
       break;
     default:
       res.statusCode = 404;
